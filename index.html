@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F3D4C">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><title>Yatra</title>
+<style>
+:root{--ink:#0F3D4C;--sea:#1B6B7A;--gold:#F2A33A;--coral:#E2583E;--mist:#E9F1F0;--txt:#14262C;--mut:#5E7379;--ok:#2E8B57}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mist);color:var(--txt);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+#app{max-width:520px;margin:0 auto;min-height:100vh;padding:0 16px 96px}
+h1,h2,h3{margin:0;line-height:1.15}button{font:inherit;cursor:pointer}
+.btn{background:var(--ink);color:#fff;border:0;border-radius:14px;padding:14px 20px;font-weight:700;width:100%}
+.btn.gold{background:var(--gold);color:var(--ink)}.ghost{background:none;border:0;color:var(--sea);font-weight:600;padding:8px}
+.top{background:var(--ink);color:#fff;margin:0 -16px 16px;padding:20px 16px 22px;border-radius:0 0 28px 28px;position:relative}
+.top::after{content:"";position:absolute;left:24px;right:24px;bottom:10px;border-top:2px dashed rgba(255,255,255,.25)}
+.top .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.top h1{font-size:28px;letter-spacing:-.5px}.sub{opacity:.75;font-size:14px;margin-top:4px}
+.big{font-size:40px;font-weight:800;letter-spacing:-1px;margin-top:12px}
+.bar{height:10px;background:rgba(255,255,255,.2);border-radius:9px;overflow:hidden;margin:10px 0 18px}.bar i{display:block;height:100%;background:var(--gold)}.bar i.over{background:var(--coral)}
+.ticket{display:block;width:100%;text-align:left;border:0;padding:0;margin:0 0 14px;background:none}
+.ticket .in{background:#fff;border-radius:18px;padding:16px 18px;display:flex;justify-content:space-between;gap:12px;
+-webkit-mask:radial-gradient(circle 10px at 72% 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 10px at 72% 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+mask:radial-gradient(circle 10px at 72% 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 10px at 72% 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.ticket .l{flex:0 0 68%;border-right:2px dashed #cfdcdb;padding-right:10px}.ticket b{font-size:19px;color:var(--ink)}.ticket small{color:var(--mut);display:block;margin-top:3px}
+.ticket .r{text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;font-weight:800;color:var(--sea)}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:14px}.tabs button{flex:1;border:0;background:none;padding:10px;border-radius:10px;font-weight:700;color:var(--mut)}.tabs .on{background:var(--ink);color:#fff}
+.card{background:#fff;border-radius:18px;padding:14px 16px;margin-bottom:12px}
+.day h3{display:flex;justify-content:space-between;color:var(--ink);font-size:17px;margin-bottom:6px}.day .flag{color:var(--coral)}
+.ex{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #edf2f1}.ex .e{font-size:22px}.ex .m{flex:1;min-width:0}.ex .m small{color:var(--mut);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ex .x{border:0;background:none;color:#a4b3b6;font-size:18px}
+.fab{position:fixed;right:max(16px,calc(50% - 244px));bottom:calc(20px + env(safe-area-inset-bottom));background:var(--gold);color:var(--ink);border:0;border-radius:30px;padding:16px 24px;font-weight:800;box-shadow:0 8px 20px #0f3d4c55}
+.pos{color:var(--ok)}.neg{color:var(--coral)}.row2{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid #edf2f1}.row2:first-child{border:0}
+.mut{color:var(--mut);font-size:14px}.empty{text-align:center;color:var(--mut);padding:36px 12px}
+dialog{border:0;border-radius:24px 24px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom));width:100%;max-width:520px;margin:auto auto 0;background:#fff}dialog::backdrop{background:#0008}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 5px}input,select,textarea{width:100%;font:inherit;padding:12px;border:1.5px solid #cfdcdb;border-radius:12px;background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips label{margin:0;font-weight:600}.chips input{display:none}.chips span{display:block;padding:9px 13px;border-radius:20px;background:var(--mist)}.chips input:checked+span{background:var(--ink);color:#fff}
+.wt{min-height:100vh;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:14px;position:relative}.wt .big{font-size:88px;margin:0}.wt h1{font-size:32px;color:var(--ink)}.wt p{color:var(--mut);max-width:30ch;margin:0 auto 10px}
+.skip{position:absolute;top:16px;right:0;background:none;border:0;color:var(--sea);font-weight:700;padding:10px}
+.dots{display:flex;gap:8px;justify-content:center;margin-bottom:12px}.dots i{width:9px;height:9px;border-radius:9px;background:#b9cbca}.dots i.on{width:26px;background:var(--gold)}
+@media(prefers-reduced-motion:no-preference){dialog[open]{animation:up .22s ease-out}@keyframes up{from{transform:translateY(40px);opacity:0}}}
+</style></head><body><div id="app"></div><dialog id="dlg"></dialog>
+<script>
+const $=s=>document.querySelector(s),K='yatra.v1';
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}S=S||{trips:[],seen:0};
+let cur=null,tab='days',si=0;
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){alert('Phone storage is full. Free some space to keep saving.')}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9);
+const SYM={INR:'₹',USD:'$',EUR:'€',GBP:'£'},CATS={Food:'🍛',Stay:'🛏️',Travel:'🚌',Sights:'🛕',Shopping:'🛍️',Other:'✨'};
+const $$=(t,n)=>(n<0?'-':'')+(SYM[t.cur]||'')+Math.round(Math.abs(n)).toLocaleString('en-IN');
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const T=()=>S.trips.find(t=>t.id===cur);
+const SL=[['🧳','Start a trip','Tap New trip, name it and set a daily budget.'],['👨‍👩‍👧','Add your people','Type each name. Everyone on the trip shares the cost equally.'],['🧾','Log every day','Add each expense with a category and who paid. You can fill in past days later.'],['⚖️','Settle up','See who gets money back and who pays whom, so everyone spends the same.']];
+const total=t=>t.exps.reduce((s,e)=>s+e.amt,0);
+function settle(t){const n=t.people.length||1,share=total(t)/n,g={};t.people.forEach(p=>g[p]=0);
+t.contribs.forEach(c=>g[c.who]=(g[c.who]||0)+c.amt);t.exps.forEach(e=>{if(e.by!=='pool')g[e.by]=(g[e.by]||0)+e.amt});
+const bal=t.people.map(p=>({p,given:g[p]||0,bal:(g[p]||0)-share}));
+const cr=bal.filter(b=>b.bal>.5).map(b=>({...b})),db=bal.filter(b=>b.bal<-.5).map(b=>({...b})),tr=[];
+cr.sort((a,b)=>b.bal-a.bal);db.sort((a,b)=>a.bal-b.bal);
+for(let i=0,j=0;i<cr.length&&j<db.length;){const x=Math.min(cr[i].bal,-db[j].bal);tr.push([db[j].p,cr[i].p,x]);cr[i].bal-=x;db[j].bal+=x;if(cr[i].bal<.5)i++;if(db[j].bal>-.5)j++}
+return{share,bal,tr,left:bal.reduce((s,b)=>s+b.bal,0)}}
+function render(){const a=$('#app');
+if(!S.seen){const[e,h,p]=SL[si];a.innerHTML=`<section class="wt"><button class="skip" onclick="done()">Skip</button><div class="big">${e}</div><h1>${h}</h1><p>${p}</p><div class="dots">${SL.map((_,i)=>`<i class="${i==si?'on':''}"></i>`).join('')}</div><button class="btn gold" onclick="nx()">${si==SL.length-1?'Get started':'Next'}</button></section>`;return}
+const t=T();if(!t){a.innerHTML=`<div class="top"><div class="row"><h1>Yatra</h1><button class="ghost" style="color:#fff" onclick="S.seen=0;si=0;render()">How it works</button></div><div class="sub">Every trip, every rupee. Works without internet.</div></div>
+${S.trips.length?S.trips.map(x=>`<button class="ticket" onclick="cur='${x.id}';tab='days';render()"><div class="in"><div class="l"><b>${esc(x.name)}</b><small>${x.people.length} people</small></div><div class="r"><span>${$$(x,total(x))}</span><small class="mut">spent</small></div></div></button>`).join(''):'<div class="empty">No trips yet.<br>Create one to start tracking.</div>'}
+<button class="fab" onclick="newTrip()">+ New trip</button>`;return}
+const days=[...new Set(t.exps.map(e=>e.date))].sort().reverse(),first=[...t.exps.map(e=>e.date)].sort()[0],td=t.exps.filter(e=>e.date===today()).reduce((s,e)=>s+e.amt,0),pc=t.budget?Math.min(100,td/t.budget*100):0;
+let body='';
+if(tab==='days')body=days.length?days.map(d=>{const L=t.exps.filter(e=>e.date===d),s=L.reduce((x,e)=>x+e.amt,0),n=Math.round((new Date(d)-new Date(first))/864e5)+1;
+return`<div class="card day"><h3><span>Day ${n} <span class="mut">${new Date(d+'T00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</span></span><span class="${t.budget&&s>t.budget?'flag':''}">${$$(t,s)}</span></h3>${L.map(e=>`<div class="ex"><span class="e">${CATS[e.cat]}</span><div class="m"><b>${$$(t,e.amt)}</b><small>${esc(e.note||e.cat)} · ${e.by==='pool'?'Pool':esc(e.by)}</small></div><button class="x" aria-label="Delete" onclick="delE('${e.id}')">✕</button></div>`).join('')}</div>`}).join(''):'<div class="empty">No spending yet.<br>Tap Add expense.</div>';
+if(tab==='people'){body=`<div class="card"><b>Money put in</b>${t.contribs.map(c=>`<div class="row2"><span>${esc(c.who)}</span><span>${$$(t,c.amt)} <button class="x ghost" aria-label="Delete" onclick="delC('${c.id}')">✕</button></span></div>`).join('')||'<div class="mut">Nobody has put money in yet.</div>'}<button class="btn" style="margin-top:12px" onclick="addC()">+ Add money put in</button></div>
+<div class="card"><b>Travellers</b>${t.people.map(p=>`<div class="row2"><span>${esc(p)}</span></div>`).join('')}<button class="ghost" onclick="addP()">+ Add person</button></div>`}
+if(tab==='settle'){const r=settle(t);body=`<div class="card"><div class="mut">Total spent ${$$(t,total(t))} · each person's share</div><div class="big" style="margin:4px 0 0;color:var(--ink)">${$$(t,r.share)}</div></div>
+<div class="card">${r.bal.map(b=>`<div class="row2"><span>${esc(b.p)}<small class="mut" style="display:block">put in ${$$(t,b.given)}</small></span><b class="${b.bal>.5?'pos':b.bal<-.5?'neg':''}">${b.bal>.5?'gets back '+$$(t,b.bal):b.bal<-.5?'pays '+$$(t,-b.bal):'settled'}</b></div>`).join('')}</div>
+<div class="card"><b>Who pays whom</b>${r.tr.map(x=>`<div class="row2"><span>${esc(x[0])} → ${esc(x[1])}</span><b>${$$(t,x[2])}</b></div>`).join('')||'<div class="mut">Everyone is even.</div>'}</div>${r.left>.5?`<div class="mut" style="padding:0 6px">${$$(t,r.left)} of the money put in is unspent, so the amounts above do not balance exactly.</div>`:''}`}
+a.innerHTML=`<div class="top"><div class="row"><button class="ghost" style="color:#fff;padding:0" onclick="cur=null;render()">‹ Trips</button><button class="ghost" style="color:#fff;padding:0" onclick="delT()">Delete trip</button></div><h1 style="margin-top:10px">${esc(t.name)}</h1><div class="sub">${t.people.length} people · ${$$(t,total(t))} spent</div>
+${t.budget?`<div class="sub" style="margin-top:14px">Today ${$$(t,td)} of ${$$(t,t.budget)}</div><div class="bar"><i class="${td>t.budget?'over':''}" style="width:${pc}%"></i></div>`:''}</div>
+<div class="tabs">${[['days','Days'],['people','People'],['settle','Settle up']].map(([k,l])=>`<button class="${tab==k?'on':''}" onclick="tab='${k}';render()">${l}</button>`).join('')}</div>${body}${tab==='days'?'<button class="fab" onclick="addE()">+ Add expense</button>':''}`}
+function nx(){if(si<SL.length-1){si++;render()}else done()}
+function done(){S.seen=1;save();render()}
+function sheet(h){const d=$('#dlg');d.innerHTML=h;d.showModal();d.onclick=e=>{if(e.target===d)d.close()};return d}
+const fd=f=>Object.fromEntries(new FormData(f));
+function newTrip(){sheet(`<h2>New trip</h2><form onsubmit="return mk(this)"><label>Trip name</label><input name="name" required placeholder="Jagannath Puri"><label>Currency</label><select name="cur">${Object.keys(SYM).map(c=>`<option>${c}</option>`).join('')}</select><label>Daily budget (optional)</label><input name="budget" type="number" inputmode="decimal" min="0"><label>People (one name per line)</label><textarea name="ppl" rows="4" required placeholder="Me&#10;Amma&#10;Nanna"></textarea><br><br><button class="btn">Create trip</button></form>`)}
+function mk(f){const v=fd(f),p=[...new Set(v.ppl.split(/[\n,]/).map(s=>s.trim()).filter(Boolean))];const t={id:uid(),name:v.name.trim(),cur:v.cur,budget:+v.budget||0,people:p,contribs:[],exps:[]};S.trips.unshift(t);save();cur=t.id;$('#dlg').close();render();return false}
+function addE(){const t=T();sheet(`<h2>Add expense</h2><form onsubmit="return mkE(this)"><label>Amount (${SYM[t.cur]})</label><input name="amt" type="number" inputmode="decimal" min="0" step="any" required autofocus><label>Category</label><div class="chips">${Object.keys(CATS).map((c,i)=>`<label><input type="radio" name="cat" value="${c}" ${i?'':'checked'}><span>${CATS[c]} ${c}</span></label>`).join('')}</div><label>Note</label><input name="note" placeholder="Lunch at the beach"><label>Date</label><input name="date" type="date" value="${today()}" required><label>Paid by</label><select name="by"><option value="pool">Shared pool</option>${t.people.map(p=>`<option>${esc(p)}</option>`).join('')}</select><br><br><button class="btn">Save expense</button></form>`)}
+function mkE(f){const v=fd(f);T().exps.push({id:uid(),amt:+v.amt,cat:v.cat,note:v.note.trim(),date:v.date,by:v.by});save();$('#dlg').close();render();return false}
+function addC(){const t=T();sheet(`<h2>Money put in</h2><form onsubmit="return mkC(this)"><label>Who</label><select name="who">${t.people.map(p=>`<option>${esc(p)}</option>`).join('')}</select><label>Amount (${SYM[t.cur]})</label><input name="amt" type="number" inputmode="decimal" min="0" step="any" required><br><br><button class="btn">Save</button></form>`)}
+function mkC(f){const v=fd(f);T().contribs.push({id:uid(),who:v.who,amt:+v.amt});save();$('#dlg').close();render();return false}
+function addP(){sheet(`<h2>Add person</h2><form onsubmit="return mkP(this)"><label>Name</label><input name="n" required><br><br><button class="btn">Add</button></form>`)}
+function mkP(f){const n=fd(f).n.trim(),t=T();if(n&&!t.people.includes(n))t.people.push(n);save();$('#dlg').close();render();return false}
+function delE(id){if(confirm('Delete this expense?')){const t=T();t.exps=t.exps.filter(e=>e.id!==id);save();render()}}
+function delC(id){const t=T();t.contribs=t.contribs.filter(e=>e.id!==id);save();render()}
+function delT(){if(confirm('Delete this whole trip and its expenses?')){S.trips=S.trips.filter(t=>t.id!==cur);cur=null;save();render()}}
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+render();
+</script></body></html>
